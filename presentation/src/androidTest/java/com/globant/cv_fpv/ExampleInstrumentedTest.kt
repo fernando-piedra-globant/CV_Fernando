@@ -1,4 +1,4 @@
-package com.example.cv_fpv
+package com.globant.cv_fpv
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getTargetContext()
-        assertEquals("com.example.cv_fpv", appContext.packageName)
+        assertEquals("com.globant.cv_fpv", appContext.packageName)
     }
 }

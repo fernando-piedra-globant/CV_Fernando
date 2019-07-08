@@ -1,4 +1,4 @@
-package com.example.data;
+package com.globant.data;
 
 public class MyClass {
 }

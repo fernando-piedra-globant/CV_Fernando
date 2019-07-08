@@ -1,4 +1,4 @@
-package com.example.cv_fpv.di
+package com.globant.cv_fpv.di
 
 import dagger.Component
 import javax.inject.Singleton

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CV_FPV</string>
+    <string name="experience">Experiencia</string>
+    <string name="skills">Skills</string>
 </resources>

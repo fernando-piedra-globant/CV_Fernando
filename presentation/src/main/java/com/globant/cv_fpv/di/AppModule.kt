@@ -1,7 +1,7 @@
-package com.example.cv_fpv.di
+package com.globant.cv_fpv.di
 
 import android.content.Context
-import com.example.cv_fpv.CVApplication
+import com.globant.cv_fpv.CVApplication
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

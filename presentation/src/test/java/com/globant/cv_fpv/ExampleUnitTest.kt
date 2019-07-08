@@ -1,4 +1,4 @@
-package com.example.cv_fpv
+package com.globant.cv_fpv
 
 import org.junit.Test
 
