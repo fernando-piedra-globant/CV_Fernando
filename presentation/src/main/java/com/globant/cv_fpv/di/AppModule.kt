@@ -3,16 +3,22 @@ package com.globant.cv_fpv.di
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import android.content.Context
+import com.globant.cv_fpv.BuildConfig
 import com.globant.cv_fpv.CVApplication
 import com.globant.cv_fpv.view_model.ProfileViewModel
-import com.globant.data.repositories.ProfileRepositoryImpl
+import com.globant.data.repositories.repositories.ProfileRepositoryImpl
+import com.globant.data.repositories.source.CVApi
 import com.globant.domain.executor.PostExecutionThread
 import com.globant.domain.executor.ThreadExecutor
 import com.globant.domain.use_cases.ProfileUseCase
-import dagger.Binds
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.IntoMap
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Provider
 import javax.inject.Singleton
 
@@ -21,14 +27,38 @@ class AppModule(private val application: CVApplication) {
 
     @Singleton
     @Provides
-    fun provideContext(): Context {
-        return application
+    fun provideGson(): Gson {
+        return GsonBuilder().create()
     }
 
     @Singleton
     @Provides
-    fun provideProfileRepository(): ProfileRepositoryImpl {
-        return ProfileRepositoryImpl()
+    fun provideContext(): Context {
+        return application
+    }
+
+
+
+    @Singleton
+    @Provides
+    fun provideRetrofit(gson: Gson): Retrofit {
+        return Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .baseUrl(BuildConfig.SERVER_URL)
+            .client(OkHttpClient.Builder().build())
+            .build()
+    }
+
+    @Singleton
+    @Provides
+    fun provideCVApi(retrofit: Retrofit): CVApi {
+        return retrofit.create<CVApi>(CVApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideProfileRepository(gson: Gson, cvApi: CVApi): ProfileRepositoryImpl {
+        return ProfileRepositoryImpl(gson, cvApi)
     }
 
     @Singleton
@@ -59,4 +89,6 @@ class AppModule(private val application: CVApplication) {
     @ViewModelKey(ProfileViewModel::class)
     fun provideFeatureViewModel(profileUseCase: ProfileUseCase): ViewModel =
         ProfileViewModel(profileUseCase)
+
+
 }
