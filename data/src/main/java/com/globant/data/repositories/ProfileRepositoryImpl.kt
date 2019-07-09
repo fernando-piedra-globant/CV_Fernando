@@ -7,7 +7,12 @@ import javax.inject.Inject
 
 class ProfileRepositoryImpl @Inject constructor() : ProfileRepository {
     override fun getProfile(): Single<Profile> {
-
-        return null!!
+        return Single.just(Profile(
+            "Fernando",
+            "Ingeniero en sistemas",
+            "Azcapotzalco, CDMX",
+            "fernando.piedra@globant.com",
+            "5555555555"
+        ))
     }
 }
