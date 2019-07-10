@@ -1,4 +1,4 @@
-package com.globant.domain.use_cases
+package com.globant.domain.use.cases
 
 import com.globant.domain.executor.PostExecutionThread
 import com.globant.domain.executor.ThreadExecutor
