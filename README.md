@@ -1,6 +1,6 @@
 # CV_Fernando APP
 
-This is my applicaion that show my profile, experience and sills, this information is fetched from my gists and its arcitecture es Clean architecture
+This is my applicaion that show my profile, experience and skills, this information is fetched from my gists and its arcitecture es Clean architecture
 
 ### This app is developed using this modules(layers):
 
