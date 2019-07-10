@@ -1,7 +1,6 @@
 package com.globant.cv_fpv.view_model
 
 import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
 import com.globant.cv_fpv.model.Profile
 import com.globant.cv_fpv.view_model.base.BaseViewModel
 import com.globant.domain.use.cases.ProfileUseCase

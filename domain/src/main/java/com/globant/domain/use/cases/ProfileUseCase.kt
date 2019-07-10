@@ -8,7 +8,7 @@ import io.reactivex.Single
 import javax.inject.Inject
 
 class ProfileUseCase @Inject constructor(
-    val profileRepository: ProfileRepository,
+    private val profileRepository: ProfileRepository,
     threadExecutor: ThreadExecutor,
     postExecutionThread: PostExecutionThread
 ) : SingleUseCase<Profile>(threadExecutor, postExecutionThread) {

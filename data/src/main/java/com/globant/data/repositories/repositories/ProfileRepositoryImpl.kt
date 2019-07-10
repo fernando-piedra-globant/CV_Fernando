@@ -15,8 +15,6 @@ class ProfileRepositoryImpl @Inject constructor(val gson: Gson, val api: CVApi) 
         return Single.create<Profile> { emitter: SingleEmitter<Profile> ->
 
             try {
-
-
                 val response = api.getProfile().execute()
 
                 if (response.isSuccessful) {
@@ -26,16 +24,9 @@ class ProfileRepositoryImpl @Inject constructor(val gson: Gson, val api: CVApi) 
                 } else {
                     emitter.onError(Exception("No data received"))
                 }
-            }catch (e: java.lang.Exception){
+            } catch (e: java.lang.Exception) {
                 emitter.onError(Exception("No data received"))
             }
-            /*
-            if (shouldUpdate(page, forced)) {
-                loadUsersFromNetwork(page, emitter)
-            } else {
-                loadOfflineUsers(page, emitter)
-            }
-            */
         }
     }
 }

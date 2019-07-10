@@ -8,13 +8,16 @@ import com.globant.cv_fpv.CVApplication
 import com.globant.cv_fpv.navigator.Navigator
 import com.globant.cv_fpv.view_model.ExperienceViewModel
 import com.globant.cv_fpv.view_model.ProfileViewModel
+import com.globant.cv_fpv.view_model.SkillsViewModel
 import com.globant.data.repositories.repositories.ExperienceRepositoryImpl
 import com.globant.data.repositories.repositories.ProfileRepositoryImpl
+import com.globant.data.repositories.repositories.SkillsRepositoryImpl
 import com.globant.data.repositories.source.CVApi
 import com.globant.domain.executor.PostExecutionThread
 import com.globant.domain.executor.ThreadExecutor
 import com.globant.domain.use.cases.ExperienceUseCase
 import com.globant.domain.use.cases.ProfileUseCase
+import com.globant.domain.use.cases.SkillsUseCase
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -77,6 +80,12 @@ class AppModule(private val application: CVApplication) {
 
     @Singleton
     @Provides
+    fun provideSkillsRepository(gson: Gson, cvApi: CVApi): SkillsRepositoryImpl {
+        return SkillsRepositoryImpl(gson, cvApi)
+    }
+
+    @Singleton
+    @Provides
     fun provideProfileUseCase(
         profileRepositoryImpl: ProfileRepositoryImpl,
         threadExecutor: ThreadExecutor,
@@ -95,8 +104,16 @@ class AppModule(private val application: CVApplication) {
         return ExperienceUseCase(experienceRepositoryImpl, threadExecutor, postExecutionThread)
     }
 
-    /* Singleton factory that searches generated map for specific provider and
-  uses it to get a ViewModel instance */
+    @Singleton
+    @Provides
+    fun provideSkillsUseCase(
+        skillsRepositoryImpl: SkillsRepositoryImpl,
+        threadExecutor: ThreadExecutor,
+        postExecutionThread: PostExecutionThread
+    ): SkillsUseCase {
+        return SkillsUseCase(skillsRepositoryImpl, threadExecutor, postExecutionThread)
+    }
+
     @Provides
     @Singleton
     fun provideViewModelFactory(
@@ -107,18 +124,22 @@ class AppModule(private val application: CVApplication) {
         }
     }
 
-    /* Associate this provider method with FeatureViewModel type in a generated map */
     @Provides
     @IntoMap
     @ViewModelKey(ProfileViewModel::class)
     fun provideProfileViewModel(profileUseCase: ProfileUseCase): ViewModel =
         ProfileViewModel(profileUseCase)
 
-    /* Associate this provider method with FeatureViewModel type in a generated map */
     @Provides
     @IntoMap
     @ViewModelKey(ExperienceViewModel::class)
-    fun provideExperienceViewModel(experienceUseCase: ExperienceUseCase): ViewModel = ExperienceViewModel(experienceUseCase)
+    fun provideExperienceViewModel(experienceUseCase: ExperienceUseCase): ViewModel =
+        ExperienceViewModel(experienceUseCase)
+
+    @Provides
+    @IntoMap
+    @ViewModelKey(SkillsViewModel::class)
+    fun provideSkillsViewModel(skillsUseCase: SkillsUseCase): ViewModel = SkillsViewModel(skillsUseCase)
 
     @Singleton
     @Provides

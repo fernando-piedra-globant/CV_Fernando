@@ -42,10 +42,17 @@ class ProfileFragment : BaseFragment() {
     }
 
     private fun setupViews() {
-        btnExperience.setOnClickListener {
+        btn_experience.setOnClickListener {
             navigator.addFragment(
                 activity as BaseActivity,
                 ExperienceFragment.newInstance()
+            )
+        }
+
+        btn_skills.setOnClickListener {
+            navigator.addFragment(
+                activity as BaseActivity,
+                SkillsFragment.newInstance()
             )
         }
 
