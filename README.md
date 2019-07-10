@@ -1,12 +1,12 @@
 # CV_Fernando APP
 
-This is my applicaion that show my profile, experience and skills, this information is fetched from my gists and its arcitecture es Clean architecture
+This is my applicaion that show my profile, experience and skills, this information is fetched from my gists and its arcitecture is Clean architecture
 
 ### This app is developed using this modules(layers):
 
 #### Presentation
 
-This layer contains visual components(views, layouts, fragments, activities, viewmodels, models), is based on MVVM Pattern.
+This layer contains visual components(views, layouts, fragments, activities, viewmodels, models), implements MVVM Pattern.
 
 #### Data
 
