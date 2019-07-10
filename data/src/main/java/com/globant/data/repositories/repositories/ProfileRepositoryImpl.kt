@@ -12,20 +12,13 @@ class ProfileRepositoryImpl @Inject constructor(val gson: Gson, val api: CVApi) 
 
     override fun getProfile(): Single<Profile> {
 
-        return Single.create<Profile> { emitter: SingleEmitter<Profile> ->
-
-            try {
-                val response = api.getProfile().execute()
-
-                if (response.isSuccessful) {
-                    val profile: Profile =
-                        gson.fromJson(response.body()?.files?.rootFile?.content, Profile::class.java)
-                    emitter.onSuccess(profile)
-                } else {
-                    emitter.onError(Exception("No data received"))
-                }
-            } catch (e: java.lang.Exception) {
-                emitter.onError(Exception("No data received"))
+        return api.getProfile().flatMap { response ->
+            if (response.isSuccessful) {
+                val profile: Profile =
+                    gson.fromJson(response.body()?.files?.rootFile?.content, Profile::class.java)
+                Single.just(profile)
+            } else {
+                Single.error(Exception("No data received"))
             }
         }
     }

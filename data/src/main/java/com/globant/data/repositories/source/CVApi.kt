@@ -1,7 +1,8 @@
 package com.globant.data.repositories.source
 
 import com.globant.data.repositories.entities.GithubEntity
-import retrofit2.Call
+import io.reactivex.Single
+import retrofit2.Response
 import retrofit2.http.GET
 
 
@@ -14,11 +15,11 @@ interface CVApi {
     }
 
     @GET(CV_PROFILE)
-    fun getProfile(): Call<GithubEntity>
+    fun getProfile(): Single<Response<GithubEntity>>
 
     @GET(CV_EXPERIENCE)
-    fun getExperience(): Call<GithubEntity>
+    fun getExperience(): Single<Response<GithubEntity>>
 
     @GET(CV_SKILLS)
-    fun getSkills(): Call<GithubEntity>
+    fun getSkills(): Single<Response<GithubEntity>>
 }

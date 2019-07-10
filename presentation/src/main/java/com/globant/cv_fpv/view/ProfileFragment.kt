@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.globant.cv_fpv.R
 import com.globant.cv_fpv.constants.CVConstants.IMAGE_URL
-import com.globant.cv_fpv.model.Profile
+import com.globant.cv_fpv.model.ProfileModel
 import com.globant.cv_fpv.navigator.Navigator
 import com.globant.cv_fpv.view.base.BaseActivity
 import com.globant.cv_fpv.view.base.BaseFragment
@@ -67,7 +67,7 @@ class ProfileFragment : BaseFragment() {
     private fun setupObservers() {
         val viewModel = ViewModelProviders.of(this, vmFactory)[ProfileViewModel::class.java]
 
-        viewModel.profile.observe(this, Observer<Profile> { profile ->
+        viewModel.getProfile().observe(this, Observer<ProfileModel> { profile ->
             name_text.text = profile?.name
             grade_text.text = profile?.grade
             address_text.text = profile?.address

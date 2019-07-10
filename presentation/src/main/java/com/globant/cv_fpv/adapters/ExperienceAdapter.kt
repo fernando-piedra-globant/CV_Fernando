@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.globant.cv_fpv.R
-import com.globant.cv_fpv.model.Experience
+import com.globant.cv_fpv.model.ExperienceModel
 import kotlinx.android.synthetic.main.experience_item.view.*
 
-class ExperienceAdapter(val items: List<Experience>) : RecyclerView.Adapter<ExperienceAdapter.ViewHolder>() {
+class ExperienceAdapter(val items: List<ExperienceModel>) : RecyclerView.Adapter<ExperienceAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(items.get(position))
@@ -23,7 +23,7 @@ class ExperienceAdapter(val items: List<Experience>) : RecyclerView.Adapter<Expe
     }
 
     class ViewHolder(internal var view: View) : RecyclerView.ViewHolder(view) {
-        fun bind(experience: Experience) {
+        fun bind(experience: ExperienceModel) {
             view.job_text.text = experience.job
             view.company_text.text = experience.company
             view.range_text.text = experience.range

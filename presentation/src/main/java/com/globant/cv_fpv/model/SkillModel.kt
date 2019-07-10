@@ -1,6 +1,6 @@
 package com.globant.cv_fpv.model
 
-data class Skill(
+data class SkillModel(
     val name: String,
     val proficiency: Int
 )

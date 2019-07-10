@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.globant.cv_fpv.R
-import com.globant.cv_fpv.model.Skill
+import com.globant.cv_fpv.model.SkillModel
 import kotlinx.android.synthetic.main.skill_item.view.*
 
-class SkillsAdapter(val items: List<Skill>) : RecyclerView.Adapter<SkillsAdapter.ViewHolder>() {
+class SkillsAdapter(val items: List<SkillModel>) : RecyclerView.Adapter<SkillsAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(items.get(position))
@@ -23,7 +23,7 @@ class SkillsAdapter(val items: List<Skill>) : RecyclerView.Adapter<SkillsAdapter
     }
 
     class ViewHolder(internal var view: View) : RecyclerView.ViewHolder(view) {
-        fun bind(skill: Skill) {
+        fun bind(skill: SkillModel) {
             view.skill_text.text = skill.name
             view.proficiency_progress.progress = skill.proficiency
         }

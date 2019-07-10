@@ -1,6 +1,6 @@
 package com.globant.cv_fpv.model
 
-data class Profile(
+data class ProfileModel(
     val name: String,
     val grade: String,
     val address: String,

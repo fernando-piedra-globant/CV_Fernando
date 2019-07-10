@@ -1,7 +1,8 @@
-package com.globant.domain.use.cases
+package com.globant.domain.interactor.usecases
 
 import com.globant.domain.executor.PostExecutionThread
 import com.globant.domain.executor.ThreadExecutor
+import com.globant.domain.interactor.SingleUseCase
 import com.globant.domain.model.Profile
 import com.globant.domain.repositories.ProfileRepository
 import io.reactivex.Single
@@ -13,8 +14,5 @@ class ProfileUseCase @Inject constructor(
     postExecutionThread: PostExecutionThread
 ) : SingleUseCase<Profile>(threadExecutor, postExecutionThread) {
 
-    override fun execute(): Single<Profile> {
-        return profileRepository.getProfile().subscribeOn(threadExecutorScheduler)
-            .observeOn(postExecutionThreadScheduler)
-    }
+    override fun buildObservable(): Single<Profile> = profileRepository.getProfile()
 }

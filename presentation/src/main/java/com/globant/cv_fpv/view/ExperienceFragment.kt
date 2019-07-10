@@ -10,7 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.globant.cv_fpv.R
 import com.globant.cv_fpv.adapters.ExperienceAdapter
-import com.globant.cv_fpv.model.Experience
+import com.globant.cv_fpv.model.ExperienceModel
 import com.globant.cv_fpv.view.base.BaseFragment
 import com.globant.cv_fpv.view_model.ExperienceViewModel
 import kotlinx.android.synthetic.main.experience_fragment.*
@@ -43,7 +43,7 @@ class ExperienceFragment : BaseFragment() {
     private fun setupObservers() {
         val viewModel = ViewModelProviders.of(this, vmFactory)[ExperienceViewModel::class.java]
 
-        viewModel.experience.observe(this, Observer<List<Experience>> { experience ->
+        viewModel.getExperience().observe(this, Observer<List<ExperienceModel>> { experience ->
 
             val adapter = ExperienceAdapter(experience ?: ArrayList())
             recycler.layoutManager = LinearLayoutManager(context)

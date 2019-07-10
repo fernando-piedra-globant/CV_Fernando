@@ -15,9 +15,9 @@ import com.globant.data.repositories.repositories.SkillsRepositoryImpl
 import com.globant.data.repositories.source.CVApi
 import com.globant.domain.executor.PostExecutionThread
 import com.globant.domain.executor.ThreadExecutor
-import com.globant.domain.use.cases.ExperienceUseCase
-import com.globant.domain.use.cases.ProfileUseCase
-import com.globant.domain.use.cases.SkillsUseCase
+import com.globant.domain.interactor.usecases.ExperienceUseCase
+import com.globant.domain.interactor.usecases.ProfileUseCase
+import com.globant.domain.interactor.usecases.SkillsUseCase
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -25,6 +25,7 @@ import dagger.Provides
 import dagger.multibindings.IntoMap
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Provider
@@ -55,6 +56,7 @@ class AppModule(private val application: CVApplication) {
             .build()
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create(gson))
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .baseUrl(BuildConfig.SERVER_URL)
             .client(okHttpClient)
             .build()

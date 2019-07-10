@@ -1,7 +1,8 @@
-package com.globant.domain.use.cases
+package com.globant.domain.interactor.usecases
 
 import com.globant.domain.executor.PostExecutionThread
 import com.globant.domain.executor.ThreadExecutor
+import com.globant.domain.interactor.SingleUseCase
 import com.globant.domain.model.Skill
 import com.globant.domain.repositories.SkillsRepository
 import io.reactivex.Single
@@ -13,8 +14,5 @@ class SkillsUseCase @Inject constructor(
     postExecutionThread: PostExecutionThread
 ) : SingleUseCase<List<Skill>>(threadExecutor, postExecutionThread) {
 
-    override fun execute(): Single<List<Skill>> {
-        return skillsRepository.getSkills().subscribeOn(threadExecutorScheduler)
-            .observeOn(postExecutionThreadScheduler)
-    }
+    override fun buildObservable(): Single<List<Skill>> = skillsRepository.getSkills()
 }

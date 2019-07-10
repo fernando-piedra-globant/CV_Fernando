@@ -2,6 +2,7 @@ package com.globant.data.repositories.repositories
 
 import com.globant.data.repositories.source.CVApi
 import com.globant.domain.model.Experience
+import com.globant.domain.model.Profile
 import com.globant.domain.repositories.ExperienceRepository
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -13,23 +14,16 @@ class ExperienceRepositoryImpl @Inject constructor(val gson: Gson, val api: CVAp
 
     override fun getExperience(): Single<List<Experience>> {
 
-        return Single.create<List<Experience>> { emitter: SingleEmitter<List<Experience>> ->
-
-            try {
-                val response = api.getExperience().execute()
-
-                if (response.isSuccessful) {
-                    val experience: List<Experience> =
-                        gson.fromJson(
-                            response.body()?.files?.rootFile?.content,
-                            object : TypeToken<List<Experience>>() {}.type
-                        )
-                    emitter.onSuccess(experience)
-                } else {
-                    emitter.onError(Exception("No data received"))
-                }
-            } catch (e: java.lang.Exception) {
-                emitter.onError(Exception("No data received"))
+        return api.getExperience().flatMap { response ->
+            if (response.isSuccessful) {
+                val experience: List<Experience> =
+                    gson.fromJson(
+                        response.body()?.files?.rootFile?.content,
+                        object : TypeToken<List<Experience>>() {}.type
+                    )
+                Single.just(experience)
+            } else {
+                Single.error(Exception("No data received"))
             }
         }
     }

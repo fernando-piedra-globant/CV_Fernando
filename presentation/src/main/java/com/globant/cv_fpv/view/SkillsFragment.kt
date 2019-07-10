@@ -10,7 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.globant.cv_fpv.R
 import com.globant.cv_fpv.adapters.SkillsAdapter
-import com.globant.cv_fpv.model.Skill
+import com.globant.cv_fpv.model.SkillModel
 import com.globant.cv_fpv.view.base.BaseFragment
 import com.globant.cv_fpv.view_model.SkillsViewModel
 import kotlinx.android.synthetic.main.experience_fragment.*
@@ -42,7 +42,7 @@ class SkillsFragment : BaseFragment() {
     private fun setupObservers() {
         val viewModel = ViewModelProviders.of(this, vmFactory)[SkillsViewModel::class.java]
 
-        viewModel.skills.observe(this, Observer<List<Skill>> { skills ->
+        viewModel.getSkills().observe(this, Observer<List<SkillModel>> { skills ->
 
             val adapter = SkillsAdapter(skills ?: ArrayList())
             recycler.layoutManager = LinearLayoutManager(context)
