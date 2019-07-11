@@ -1,9 +1,8 @@
 package com.globant.domain.interactor.usecases
 
-import com.globant.domain.excecutor.InmediateThreadExecutor
+import com.globant.domain.executor.InmediateThreadExecutor
 import com.globant.domain.executor.PostExecutionThread
 import com.globant.domain.model.Skill
-import com.globant.domain.repositories.ExperienceRepository
 import com.globant.domain.repositories.SkillsRepository
 import com.nhaarman.mockitokotlin2.whenever
 import io.reactivex.Single

@@ -1,4 +1,4 @@
-package com.globant.domain.excecutor
+package com.globant.domain.executor
 
 import com.globant.domain.executor.ThreadExecutor
 

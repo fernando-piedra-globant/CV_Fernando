@@ -1,6 +1,6 @@
 package com.globant.domain.interactor.usecases
 
-import com.globant.domain.excecutor.InmediateThreadExecutor
+import com.globant.domain.executor.InmediateThreadExecutor
 import com.globant.domain.executor.PostExecutionThread
 import com.globant.domain.model.Experience
 import com.globant.domain.repositories.ExperienceRepository
